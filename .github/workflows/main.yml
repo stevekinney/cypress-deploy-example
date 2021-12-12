@@ -1,8 +1,18 @@
-- name: Cypress run
-    uses: cypress-io/github-action@v2
-    with:
-      browser: chrome
-      headless: true
-      record: true
-      start: npm start
-      wait-on: http://localhost:3000
+name: Run Cypress Tests
+on: [push]
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install modules
+        run: npm ci
+      - name: Cypress
+        uses: cypress-io/github-action@v2
+        with:
+          browser: chrome
+          headless: true
+          record: true
+          start: npm start
+          wait-on: http://localhost:3000
